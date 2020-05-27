@@ -15,7 +15,7 @@ app.use(cors());
 app.use(express.json());
 
 app.listen(3000, () => {
-  console.log("Example app listening on port 3000!");
+  console.log("Express server listening on port 3000!");
 });
 
 if (isDevEnvironment) {
@@ -31,10 +31,13 @@ if (!isDevEnvironment){
     app.use(express.static("dist"));
 }
 
-app.get("/", (req, res) => {
+const geonamesAPIKey = "vildar8";
+const weatherbitAPIKey = "e9490ed04f434ba89b45c5e326582cc6"
 
+app.get("/", (req, res) => {
+  res.sendFile("dist/index.html");
 });
 
 app.post("/travelPlan", (req, res) => {
-
+  const geoURL = `http://api.geonames.org/postalCodeSearchJSON?maxRows=1&username=${geonamesAPIKey}&`
 });

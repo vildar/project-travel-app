@@ -5,13 +5,42 @@
         <title>Travel App</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        <link rel="stylesheet" href="../styles/style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Anton&family=Chelsea+Market&display=swap" rel="stylesheet">
     </head>
 
     <body>
         <header>
-            Travel App
+            TripNote
         </header>
+
+        <main>
+            <div id="content">
+                <div id="travelForm">
+                    <form>
+                        <label>
+                            Where do you want to go?
+                            <input type="text" id="tripLocation" placeholder="Toronto, Canada" required>
+                        </label>
+                    
+                        <label>
+                            When do you want to leave? 
+                            <input type="date" id="tripStartDate" required>
+                        </label>
+
+                        <label>
+                            When do you want to come back?
+                            <input type="date" id="tripEndDate" required>
+                        </label>
+                        
+                        <div class="tripBtn">
+                          <input type="submit" value="Save Trip!">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="savedTrips"></div>
+        </main>
         <script src="" async defer></script>
     </body>
 </html>
