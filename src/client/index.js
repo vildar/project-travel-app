@@ -33,9 +33,14 @@ pageInitialise()
 
 submitButton.addEventListener("click", event => {
   event.preventDefault()
-  if(checkDate(startDate.value) < 0 || daysBetween(startDate.value, endDate.value) < 0){
-    alert('1. The start of your trip must be today or after today \n2. The end of your trip must be after it starts(obviously)')
+
+  if(startDate.value !== '' && endDate.value !== '' && location.value !== ''){
+    if(checkDate(startDate.value) < 0 || daysBetween(startDate.value, endDate.value) < 0){
+      alert('1. The start of your trip must be today or after today \n2. The end of your trip must be after it starts(obviously)')
+    } else{
+      handleSubmit(location.value, startDate.value, endDate.value)
+    }
   } else{
-    handleSubmit(location.value, startDate.value, endDate.value)
+    alert('Enter all fields before you proceed.')
   }
 });
