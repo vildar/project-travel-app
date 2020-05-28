@@ -11,7 +11,7 @@ To launch the application,
 npm run build
 npm start
 ```
-Then, navigate to "http://localhost:3000" on your browser. The 'build' script creates the dist folder which runs the production mode configuration. The 'start' script runs the express server.
+Then, navigate to http://localhost:3000 on your browser. The 'build' script creates the dist folder which runs the production mode configuration. The 'start' script runs the express server.
 
 To run the webpack dev server,
 `npm run dev`
