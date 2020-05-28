@@ -1,5 +1,7 @@
-import { handleSubmit } from "./js/app";
-import { daysBetween } from "./js/app"
+import { handleSubmit } from './js/app'
+import { daysBetween } from './js/app'
+import { generateCards } from './js/app'
+import fetch from 'node-fetch'
 
 import "./styles/style.scss";
 
@@ -15,9 +17,21 @@ function checkDate(date){
   var yyyy = today.getFullYear();
 
   today = yyyy + '-' + mm + '-' + dd;
-  
+
   return daysBetween(today, date)
 }
+
+async function pageInitialise(){
+  const results = await (await fetch('http://localhost:3000/travelPlan')).json();
+  console.log(results)
+  if (results.length) {
+    results.forEach(result => {
+      generateCards(result)
+    });
+  }
+}
+
+pageInitialise()
 
 submitButton.addEventListener("click", event => {
   event.preventDefault()

@@ -37,10 +37,7 @@ if (!isDevEnvironment){
 const geonamesAPIKey = process.env.geonamesAPIKey
 const weatherbitAPIKey = process.env.weatherbitAPIKey
 const pixabayAPIKey = process.env.pixabayAPIKey
-
-app.get("/", (req, res) => {
-  res.sendFile("dist/index.html")
-});
+const cards = []
 
 app.post("/travelPlan", async (req, res) => {
   try {
@@ -51,7 +48,7 @@ app.post("/travelPlan", async (req, res) => {
 
     const pixabayURL = `https://pixabay.com/api/?key=${pixabayAPIKey}&image_type=photo&q=`
 
-    const {location, numOfDays} = req.body
+    const {location, numOfDays, startDate, endDate} = req.body
     console.log(numOfDays)
     const geoData = await(await fetch(`${geoURL}${location}`)).json()
     const lat = geoData.postalCodes[0].lat
@@ -75,7 +72,7 @@ app.post("/travelPlan", async (req, res) => {
 
     const pixaData = await(await fetch(`${pixabayURL}${location}`)).json()
     const imageURL = pixaData.hits[0].previewURL
-    
+
     let result = {}
     result.location = location
     result.numOfDays = numOfDays
@@ -83,11 +80,17 @@ app.post("/travelPlan", async (req, res) => {
     result.lowTemp = lowTemp
     result.description = description
     result.imageURL = imageURL
+    result.startDate = startDate
+    result.endDate = endDate
 
-    console.log(result)
-
+    cards.push(result)
+    console.log(cards)
     res.send(result)
   } catch (error) {
     console.error(error)
   }
-});
+})
+
+app.get("/travelPlan", (req, res) => {
+  res.send(cards)
+})
