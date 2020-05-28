@@ -57,16 +57,20 @@ app.post("/travelPlan", async (req, res) => {
     const lat = geoData.postalCodes[0].lat
     const lng = geoData.postalCodes[0].lng
     let wbData = {}
+    let {highTemp, lowTemp} = 0.0
 
-    if (numOfDays >= 7){
+    if (numOfDays <= 7){
       const temp = await(await fetch(`${wbURLCurrent}&lat=${lat}&lon=${lng}`)).json()
       wbData = temp.data[0]
+      highTemp = wbData.temp
+      lowTemp = wbData.temp
     } else{
       const temp = await(await fetch(`${wbURLForecast}&lat=${lat}&lon=${lng}`)).json()
       wbData = temp.data[8]
+      highTemp = wbData.high_temp
+      lowTemp = wbData.low_temp
     }
-    const highTemp = wbData.high_temp
-    const lowTemp = wbData.low_temp
+    
     const description = wbData.weather.description
 
     const pixaData = await(await fetch(`${pixabayURL}${location}`)).json()
