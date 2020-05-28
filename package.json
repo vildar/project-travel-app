@@ -1,10 +1,10 @@
 {
   "name": "travel-app",
   "version": "1.0.0",
-  "main": "./src/server/server.js",
+  "main": "index.js",
   "scripts": {
     "test": "",
-    "start": "npm start",
+    "start": "nodemon --exec babel-node src/server/server.js",
     "dev": "webpack-dev-server --config webpack.dev.js --open",
     "build": "webpack --config webpack.prod.js"
   },
@@ -13,14 +13,17 @@
   "license": "ISC",
   "description": "A travel application that takes in destination & data and saves trips for users.",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
+    "node-fetch": "^2.6.0",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
+    "@babel/node": "^7.10.1",
     "@babel/preset-env": "^7.9.6",
-    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
     "babel-loader": "^8.1.0",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^3.5.3",
