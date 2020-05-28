@@ -3,11 +3,13 @@ import fetch from 'node-fetch'
 
 import "./styles/style.scss"
 
+//Initialise variables with the DOM elements in the HTML FORM
 const location = document.getElementById("tripLocation")
 const startDate = document.getElementById("tripStartDate")
 const endDate = document.getElementById("tripEndDate")
 const submitButton = document.getElementById("submitBtn")
 
+//Function to error check whether the user enters the correct date
 export function checkDate(date){
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, '0');
@@ -19,6 +21,7 @@ export function checkDate(date){
   return daysBetween(today, date)
 }
 
+//Function to initialise the page with trip data to avoid loss of data during a page refresh.
 async function pageInitialise(){
   const results = await (await fetch('http://localhost:3000/travelPlan')).json();
   console.log(results)
@@ -31,6 +34,7 @@ async function pageInitialise(){
 
 pageInitialise()
 
+//Event listener to perform a function when the 'save trip' button is clicked
 submitButton.addEventListener("click", event => {
   event.preventDefault()
 

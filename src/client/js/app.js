@@ -1,17 +1,20 @@
 import fetch from 'node-fetch'
 import {checkDate} from '../index'
 
+//Function to ensure that timezones don't affect the calculation
 export function treatAsUTC(date) {
     var result = new Date(date);
     result.setMinutes(result.getMinutes() - result.getTimezoneOffset());
     return result;
 }
 
+//Function to calculate the number of days between two dates
 export function daysBetween(startDate, endDate) {
     var millisecondsPerDay = 24 * 60 * 60 * 1000;
     return (treatAsUTC(endDate) - treatAsUTC(startDate)) / millisecondsPerDay;
 }
 
+//Function to generate the cards displayed after the save trip button is clicked
 export function generateCards(result){
     const trips = document.getElementById("savedTrips")
     const trip = document.createElement("div")
@@ -69,6 +72,7 @@ export function generateCards(result){
     trip.appendChild(weatherInfo)
 }
 
+//Function that handles the onClick event
 export const handleSubmit = async (location, startDate, endDate) => {
     const numOfDays = daysBetween(startDate, endDate)
     const daysLeft = checkDate(startDate)
