@@ -48,7 +48,7 @@ app.post("/travelPlan", async (req, res) => {
 
     const pixabayURL = `https://pixabay.com/api/?key=${pixabayAPIKey}&image_type=photo&q=`
 
-    const {location, numOfDays, startDate, endDate} = req.body
+    const {location, numOfDays, startDate, endDate, daysLeft} = req.body
     console.log(numOfDays)
     const geoData = await(await fetch(`${geoURL}${location}`)).json()
     const lat = geoData.postalCodes[0].lat
@@ -82,6 +82,7 @@ app.post("/travelPlan", async (req, res) => {
     result.imageURL = imageURL
     result.startDate = startDate
     result.endDate = endDate
+    result.daysLeft = daysLeft
 
     cards.push(result)
     console.log(cards)

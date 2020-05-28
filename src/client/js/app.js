@@ -1,4 +1,5 @@
 import fetch from 'node-fetch'
+import {checkDate} from '../index'
 
 export function treatAsUTC(date) {
     var result = new Date(date);
@@ -24,6 +25,7 @@ export function generateCards(result){
     const destination = document.createElement("p")
     const description = document.createElement("p")
     const noOfDays = document.createElement("p")
+    const daysLeft = document.createElement("p")
 
     trip.classList.add("tripCard")
     sDate.id = "cardSDate"
@@ -34,6 +36,7 @@ export function generateCards(result){
     destination.id = "cardDestination"
     description.id = "cardDescription"
     noOfDays.id = "cardNumOfDays"
+    daysLeft.id = "cardDaysLeft"
     tripInfo.id = "cardTripInfo"
     weatherInfo.id = "cardWeatherInfo"
     
@@ -44,7 +47,8 @@ export function generateCards(result){
     destination.textContent = `My Trip to: ${result.location}`
     description.textContent = result.description
     image.setAttribute("src", result.imageURL)
-    noOfDays.textContent = `Your trip to ${result.location} is ${result.numOfDays} days long.`
+    noOfDays.textContent = `Trip Length: ${result.numOfDays} days`
+    daysLeft.textContent = `${result.location} is ${result.daysLeft} days away.`
 
     trips.appendChild(trip)
 
@@ -52,6 +56,7 @@ export function generateCards(result){
     tripInfo.appendChild(destination)
     tripInfo.appendChild(sDate)
     tripInfo.appendChild(eDate)
+    tripInfo.appendChild(noOfDays)
     
     weatherInfo.innerHTML = '<span>Weather Info</span>'
     weatherInfo.appendChild(hTemp)
@@ -60,13 +65,13 @@ export function generateCards(result){
     
     trip.appendChild(image)
     trip.appendChild(tripInfo)
-    trip.appendChild(noOfDays)
+    trip.appendChild(daysLeft)
     trip.appendChild(weatherInfo)
 }
 
 export const handleSubmit = async (location, startDate, endDate) => {
     const numOfDays = daysBetween(startDate, endDate)
-    console.log(numOfDays)
+    const daysLeft = checkDate(startDate)
 
     return fetch(`http://localhost:3000/travelPlan`, {
         method: "POST",
@@ -76,7 +81,8 @@ export const handleSubmit = async (location, startDate, endDate) => {
             location: location,
             numOfDays: numOfDays,
             startDate: startDate,
-            endDate: endDate
+            endDate: endDate,
+            daysLeft: daysLeft
         })
     }).then(res => res.json()).then((result) => {
         generateCards(result)

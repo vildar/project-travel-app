@@ -1,16 +1,14 @@
-import { handleSubmit } from './js/app'
-import { daysBetween } from './js/app'
-import { generateCards } from './js/app'
+import {handleSubmit, daysBetween, generateCards } from './js/app'
 import fetch from 'node-fetch'
 
-import "./styles/style.scss";
+import "./styles/style.scss"
 
 const location = document.getElementById("tripLocation")
 const startDate = document.getElementById("tripStartDate")
 const endDate = document.getElementById("tripEndDate")
 const submitButton = document.getElementById("submitBtn")
 
-function checkDate(date){
+export function checkDate(date){
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, '0');
   var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -41,16 +39,3 @@ submitButton.addEventListener("click", event => {
     handleSubmit(location.value, startDate.value, endDate.value)
   }
 });
-
-// if ("serviceWorker" in navigator) {
-//     window.addEventListener("load", () => {
-//       navigator.serviceWorker
-//         .register("/service-worker.js")
-//         .then(registration => {
-//           console.log("SW registered: ", registration);
-//         })
-//         .catch(registrationError => {
-//           console.log("SW registration failed: ", registrationError);
-//         });
-//     });
-//   }
