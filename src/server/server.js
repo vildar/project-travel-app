@@ -75,9 +75,7 @@ app.post("/travelPlan", async (req, res) => {
 
     const pixaData = await(await fetch(`${pixabayURL}${location}`)).json()
     const imageURL = pixaData.hits[0].previewURL
-
-    console.log(imageURL)
-    console.log("works till here")
+    
     let result = {}
     result.location = location
     result.numOfDays = numOfDays
