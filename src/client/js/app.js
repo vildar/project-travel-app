@@ -1,6 +1,6 @@
 import fetch from 'node-fetch'
 
-function treatAsUTC(date) {
+export function treatAsUTC(date) {
     var result = new Date(date);
     result.setMinutes(result.getMinutes() - result.getTimezoneOffset());
     return result;

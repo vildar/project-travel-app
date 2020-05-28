@@ -94,3 +94,5 @@ app.post("/travelPlan", async (req, res) => {
 app.get("/travelPlan", (req, res) => {
   res.send(cards)
 })
+
+module.exports = app;
