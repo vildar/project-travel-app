@@ -41,6 +41,19 @@
             </div>
             <div id="savedTrips"></div>
         </main>
-        <script src="" async defer></script>
+        
+        <script>
+            if ("serviceWorker" in navigator) {
+                window.addEventListener("load", () => {
+                    navigator.serviceWorker.register("/service-worker.js")
+                    .then(registration => {
+                        console.log("Service Worker is now registered: ", registration);
+                    })
+                    .catch(registrationError => {
+                        console.log("Service Worker registration has failed: ", registrationError);
+                    });
+                });
+            }
+        </script>
     </body>
 </html>
