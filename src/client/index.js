@@ -1,7 +1,7 @@
 import {handleSubmit, daysBetween, generateCards } from './js/app'
 import fetch from 'node-fetch'
 
-import "./styles/style.scss"
+import './styles/style.scss'
 
 //Initialise variables with the DOM elements in the HTML FORM
 const location = document.getElementById("tripLocation")
@@ -42,9 +42,23 @@ submitButton.addEventListener("click", event => {
     if(checkDate(startDate.value) < 0 || daysBetween(startDate.value, endDate.value) < 0){
       alert('1. The start of your trip must be today or after today \n2. The end of your trip must be after it starts(obviously)')
     } else{
-      handleSubmit(location.value, startDate.value, endDate.value)
+      const daysLeft = checkDate(startDate.value)
+      handleSubmit(location.value, startDate.value, endDate.value, daysLeft)
     }
   } else{
     alert('Enter all fields before you proceed.')
   }
 });
+
+// if ("serviceWorker" in navigator) {
+//   window.addEventListener("load", () => {
+//     navigator.serviceWorker
+//       .register("/service-worker.js")
+//       .then(registration => {
+//         console.log("SW registered: ", registration);
+//       })
+//       .catch(registrationError => {
+//         console.log("SW registration failed: ", registrationError);
+//       });
+//   });
+// }

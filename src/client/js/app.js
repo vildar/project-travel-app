@@ -1,5 +1,4 @@
 import fetch from 'node-fetch'
-import {checkDate} from '../index'
 
 //Function to ensure that timezones don't affect the calculation
 export function treatAsUTC(date) {
@@ -73,9 +72,8 @@ export function generateCards(result){
 }
 
 //Function that handles the onClick event
-export const handleSubmit = async (location, startDate, endDate) => {
+export const handleSubmit = async (location, startDate, endDate, daysLeft) => {
     const numOfDays = daysBetween(startDate, endDate)
-    const daysLeft = checkDate(startDate)
 
     return fetch(`http://localhost:3000/travelPlan`, {
         method: "POST",
